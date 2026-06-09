@@ -30,7 +30,6 @@ export const loginApi = async (emailOUsername, password) => {
 };
 
 export const registerApi = async (datos) => {
-    console.log('datos', datos)
     try {
         const response = await api.post("/auth/register", datos);
         return response.data;
@@ -44,8 +43,14 @@ export const registerApi = async (datos) => {
 // User
 
 export const upgradePlanApi = async () => {
-    const response = await api.patch("/users/upgrade-plan");
-    return response.data;
+    try {
+        const response = await api.patch("/users/upgrade-plan");
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || new Error("Error al cambiar el plan");
+    }
+    //const response = await api.patch("/users/upgrade-plan");
+    //return response.data;
 };
 
 // Subject

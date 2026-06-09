@@ -20,14 +20,15 @@ const InformeUso = ({ totalMaterias }) => {
     const handleUpgrade = async () => {
         try {
             dispatch(startLoading());
-            await upgradePlanApi();
+            //await upgradePlanApi();
+            const respuesta = await upgradePlanApi();
+            const { token } = respuesta;
             dispatch(actualizarPlanRedux("premium"));
-
             // renovar token
-            const token = localStorage.getItem("token");
+            dispatch(loginRedux({ token }));
+            //const token = localStorage.getItem("token");
             if (token) {
-                // El nuevo plan ya está en Redux, solo actualizamos el usuario local
-                toast.success("¡Ahora sos usuario Premium! Recargá para actualizar tu token.");
+                toast.success("¡Ahora sos usuario Premium!");
             }
         } catch (err) {
             toast.error(err.data.message || "Error al cambiar el plan");
@@ -43,7 +44,6 @@ const InformeUso = ({ totalMaterias }) => {
             </Card.Header>
             <Card.Body className="d-flex flex-column justify-content-between">
 
-                {/* Métricas */}
                 <div>
                     {esMasPlus && (
                         <>
@@ -88,10 +88,9 @@ const InformeUso = ({ totalMaterias }) => {
                         </Badge>
                     </div>
 
-                    {/* Botón upgrade — solo visible para estudiantes con plan plus */}
                     {esMasEstudiante && esMasPlus && (
                         <Button variant="warning" size="sm" onClick={handleUpgrade}>
-                            ⭐ Pasarme a Premium
+                            Pasarme a Premium
                         </Button>
                     )}
                 </div>
