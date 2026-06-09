@@ -52,8 +52,7 @@ const SubirImagen = ({ onImageUploaded }) => {
             if (previousPublicId) await eliminarImagenAnterior(previousPublicId);
 
         } catch (error) {
-            console.error(error);
-            alert(error.message);
+            alert(error.data.message);
         } finally {
             setLoading(false);
             e.target.value = "";

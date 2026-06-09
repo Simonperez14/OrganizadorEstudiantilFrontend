@@ -17,7 +17,7 @@ const CategoriasList = () => {
             dispatch(eliminarCategoryRedux(id));
             toast.success(`Categoría "${nombre}" eliminada`);
         } catch (err) {
-            toast.error(err.message || "Error al eliminar la categoría");
+            toast.error(err.data.message || "Error al eliminar la categoría");
         } finally {
             dispatch(stopLoading());
         }

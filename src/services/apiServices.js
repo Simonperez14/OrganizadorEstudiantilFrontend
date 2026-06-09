@@ -35,7 +35,6 @@ export const registerApi = async (datos) => {
         const response = await api.post("/auth/register", datos);
         return response.data;
     } catch (error) {
-        console.log('error', error.response?.data || error.message)
         throw error.response?.data || new Error("Error al registrarse");
     }
 

@@ -30,12 +30,11 @@ const Login = () => {
             dispatch(loginRedux({ token: data.token }));
             navigate("/", { replace: true });
         } catch (err) {
-            setError(err.message || "Error al iniciar sesión");
+            setError(err.data.message || "Error al iniciar sesión");
         } finally {
             dispatch(stopLoading());
         }
     };
-
     return (
         <Container className="min-vh-100 d-flex align-items-center justify-content-center">
             <Row className="w-100 justify-content-center">
@@ -47,7 +46,7 @@ const Login = () => {
                                 <h2 className="fw-bold text-primary">Organizador Estudiantil</h2>
                                 <p className="text-muted mb-0">Iniciá sesión para continuar</p>
                             </div>
-
+                            
                             {error && <Alert variant="danger" className="py-2">{error}</Alert>}
 
                             <Formik

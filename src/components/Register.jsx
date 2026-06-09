@@ -50,7 +50,7 @@ const Register = () => {
 
             navigate("/", { replace: true });
         } catch (err) {
-            setError(err.message || "Error al registrarse");
+            setError(err.data.message || "Error al registrarse");
         } finally {
             dispatch(stopLoading());
         }
